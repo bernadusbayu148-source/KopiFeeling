@@ -160,3 +160,36 @@ label{display:block; font-weight:600; margin-bottom:6px}
 input, textarea{
   width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:10px; font:inherit;
 }
+
+/* ====== Leaderboard Host (Home) ====== */
+#leaderboard-host{ isolation:isolate; }
+
+#leaderboard-host .leaderboard-card{
+  background:#fff; border:1px solid var(--border);
+  border-radius:16px; box-shadow:var(--shadow); padding:12px;
+}
+
+#leaderboard-host .leaderboard-frame-wrap{
+  display:flex;
+  justify-content:center;      /* center horizontal */
+  align-items:flex-start;
+}
+
+#leaderboardFrame{
+  display:block;
+  margin:0 auto;
+  width:100%;
+  max-width:980px;             /* ubah sesuai kebutuhan */
+  min-width:640px;             /* cegah tampilan mobile di desktop */
+  height:900px;                /* akan di-override via JS */
+  border:none;
+  background:transparent;
+}
+
+@media (max-width:992px){
+  #leaderboardFrame{ max-width:860px; min-width:520px; }
+}
+@media (max-width:576px){
+  #leaderboard-host .leaderboard-card{ padding:8px; }
+  #leaderboardFrame{ max-width:100%; min-width:0; height:1100px; }
+}
