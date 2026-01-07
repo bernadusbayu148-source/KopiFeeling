@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Products — CV GJS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Copy header dari index.html -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-container">
+      <a href="index.html" class="brand"><img src="assets/img/logo-oval.svg" class="logo" alt=""><span class="brand-name">CV. Gemilang Jaya Samudera</span></a>
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span></button>
+      <nav class="nav" aria-label="Main">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="products.html" class="nav-link active">Our Products</a></li>
+          <li class="nav-item"><a href="services.html" class="nav-link">Our Service</a></li>
+          <li class="nav-item dropdown">
+            <button class="nav-link dropdown-toggle" aria-expanded="false">Station Kami <span class="chev">⌄</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="stations.html#gudang" class="dropdown-link">Gudang & Distribusi</a></li>
+              <li><a href="stations.html#coverage" class="dropdown-link">Coverage Area</a></li>
+              <li><a href="stations.html#kontak-sales" class="dropdown-link">Kontak Sales</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a href="contact.html" class="nav-link">Contact Us</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-primary btn-wa" href="https://wa.me/6281234567890" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+    </div>
+  </header>
+
+  <main class="section container">
+    <h2 class="section-title">Daftar Produk</h2>
+
+    <div id="commercial" class="product-card" style="margin-bottom:20px">
+      <img src="assets/img/prod-commercial.jpg" alt="Commercial Plywood" />
+      <div class="product-info">
+        <h3>Commercial Plywood</h3>
+        <p>1220x2440mm • 3–18mm • Lem MR/BWR</p>
+        <a class="btn btn-outline" href="contact.html#quote">Minta Penawaran</a>
+      </div>
+    </div>
+
+    <div id="film-faced" class="product-card" style="margin-bottom:20px">
+      <img src="assets/img/prod-film-faced.jpg" alt="Film Faced Plywood" />
+      <div class="product-info">
+        <h3>Film Faced Plywood</h3>
+        <p>Bekisting • Tahan kelembaban • Permukaan halus</p>
+        <a class="btn btn-outline" href="contact.html#quote">Minta Penawaran</a>
+      </div>
+    </div>
+
+    <div id="marine" class="product-card" style="margin-bottom:20px">
+      <img src="assets/img/prod-marine.jpg" alt="Marine Plywood" />
+      <div class="product-info">
+        <h3>Marine Plywood</h3>
+        <p>Lem phenolic • Cocok lingkungan lembab</p>
+        <a class="btn btn-outline" href="contact.html#quote">Minta Penawaran</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom"><p>© <span id="year"></span> CV. GJS.</p></div>
+  </footer>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
