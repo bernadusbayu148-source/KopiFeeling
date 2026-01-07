@@ -29,3 +29,17 @@ el.limit.addEventListener('change',(e)=>{ state.limit=Number(e.target.value); re
 el.refresh.addEventListener('click',()=>{ fetchSheet(); });
 
 fetchSheet();
+
+// ==== Kirim tinggi konten ke parent (Home) ====
+(function postHeightToParent(){
+  const send = () => {
+    const h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    // ganti '*' dengan origin situs kamu jika ingin lebih ketat
+    window.parent?.postMessage({ type: 'LB_HEIGHT', height: h }, '*');
+  };
+  window.addEventListener('load', send);
+  window.addEventListener('resize', send);
+  new MutationObserver(() => send()).observe(document.body, {
+    childList:true, subtree:true, attributes:true
+  });
+})();
