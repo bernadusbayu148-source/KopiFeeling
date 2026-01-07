@@ -43,3 +43,14 @@ fetchSheet();
     childList:true, subtree:true, attributes:true
   });
 })();
+
+(function postHeightToParent(){
+  const send = () => {
+    const h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    window.parent?.postMessage({ type: 'LB_HEIGHT', height: h }, '*');
+  };
+  window.addEventListener('load', send);
+  window.addEventListener('resize', send);
+  new MutationObserver(send).observe(document.body, { childList:true, subtree:true, attributes:true });
+})();
+
