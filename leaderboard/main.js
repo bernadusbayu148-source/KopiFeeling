@@ -53,4 +53,3 @@ fetchSheet();
   window.addEventListener('resize', send);
   new MutationObserver(send).observe(document.body, { childList:true, subtree:true, attributes:true });
 })();
-
