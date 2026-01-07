@@ -11,6 +11,41 @@
   --shadow:0 8px 24px rgba(0,0,0,.08);
 }
 
+/* ====== Leaderboard Host (Home) ====== */
+#leaderboard-host{ isolation:isolate; }
+
+#leaderboard-host .leaderboard-card{
+  background:#fff; border:1px solid var(--border);
+  border-radius:16px; box-shadow:var(--shadow); padding:12px;
+}
+
+#leaderboard-host .leaderboard-frame-wrap{
+  display:flex; justify-content:center; align-items:flex-start;
+}
+
+/* iframe responsif: tampak sedikit lebih kecil via max-width */
+#leaderboardFrame{
+  width:100%;
+  max-width: 920px;   /* ubah: 860px/820px kalau mau lebih ringkas */
+  height: 900px;      /* akan diatur otomatis via JS */
+  border:none; background:transparent;
+}
+
+@media (max-width: 992px){
+  #leaderboardFrame{ max-width: 860px; }
+}
+@media (max-width: 576px){
+  #leaderboard-host .leaderboard-card{ padding:8px; }
+  #leaderboardFrame{ max-width: 100%; height: 1100px; }
+}
+
+/* ——— Opsi alternatif (kalau tetap ingin “dikecilkan” pakai scale)
+#leaderboard-host .leaderboard-frame-wrap{
+  transform: scale(.94);
+  transform-origin: top center;
+}
+*/
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
