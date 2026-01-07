@@ -89,8 +89,10 @@ body{
 .nav-item.dropdown{position:relative}
 .dropdown-toggle{background:none; border:none; cursor:pointer}
 .dropdown-menu{
-  position:absolute; top:100%; left:0; min-width:220px; background:#fff; border:1px solid var(--border);
+position: absolute; top:100%; left:0;
+  min-width:220px; background:#fff; border:1px solid var(--border);
   border-radius:10px; box-shadow:var(--shadow); padding:8px; display:none;
+  z-index: 1001; 
 }
 .dropdown-menu .dropdown-link{
   display:block; padding:10px 12px; border-radius:8px; color:#333; text-decoration:none; font-weight:600;
