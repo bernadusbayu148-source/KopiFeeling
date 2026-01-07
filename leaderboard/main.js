@@ -241,7 +241,7 @@ el.refresh.addEventListener('click',()=>{ fetchSheet(); });
 /* Mulai fetch */
 fetchSheet();
 
-/* ==== Kirim tinggi konten ke parent (Home) ==== */
+
 (function postHeightToParent(){
   const send = () => {
     const h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
@@ -249,5 +249,6 @@ fetchSheet();
   };
   window.addEventListener('load', send);
   window.addEventListener('resize', send);
-  new MutationObserver(() => send()).observe(document.body, { childList:true, subtree:true, attributes:true });
+  new MutationObserver(send).observe(document.body, { childList:true, subtree:true, attributes:true });
 })();
+
