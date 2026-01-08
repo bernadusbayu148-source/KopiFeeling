@@ -166,3 +166,58 @@ if (slider){
   }
 })();
 
+  
+// ===== Service Tabs (single-page) =====
+(function initServiceTabs(){
+  const tabsWrap = document.querySelector('.service-tabs');
+  const tabs = document.querySelectorAll('.service-tabs .tab');
+  const panels = document.querySelectorAll('.tab-panel');
+  if (!tabsWrap || !tabs.length || !panels.length) return;
+
+  const idFromTab = (tab) => tab?.dataset?.tab || '';
+  const panelByKey = (key) => document.getElementById(`panel-${key}`);
+  const tabByKey = (key) => document.getElementById(`tab-${key}`);
+
+  const setActive = (key) => {
+    // reset tabs
+    tabs.forEach(t => {
+      const active = idFromTab(t) === key;
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    // reset panels
+    panels.forEach(p => {
+      const active = p.id === `panel-${key}`;
+      if (active){ p.removeAttribute('hidden'); p.classList.add('is-active'); }
+      else { p.setAttribute('hidden',''); p.classList.remove('is-active'); }
+    });
+    // update hash (deep-link)
+    if (key) history.replaceState(null,'', `#${key}`);
+  };
+
+  // init from hash (e.g. services.html#everyday)
+  const initial = (location.hash || '').replace('#','') || idFromTab(tabs[0]);
+  setActive(['party','toyou','everyday','wedding'].includes(initial) ? initial : 'party');
+
+  // click handlers
+  tabs.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      setActive(idFromTab(btn));
+    });
+    // keyboard: Enter/Space
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault(); setActive(idFromTab(btn));
+      }
+    });
+  });
+
+  // handle back/forward if hash changes
+  window.addEventListener('hashchange', () => {
+    const key = (location.hash || '').replace('#','');
+    if (tabByKey(key) && panelByKey(key)) setActive(key);
+  });
+})();
+``
+
