@@ -94,3 +94,16 @@ if (slider){
   });
 })();
 
+
+// ===== Mobile toggle (hamburger) =====
+(function initMobileMenu(){
+  const navToggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.nav');
+  if (!navToggle || !nav) return;
+
+  navToggle.addEventListener('click', () => {
+    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', String(!expanded));
+    nav.classList.toggle('open');
+  });
+})();
