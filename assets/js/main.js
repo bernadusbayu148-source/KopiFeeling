@@ -219,5 +219,51 @@ if (slider){
     if (tabByKey(key) && panelByKey(key)) setActive(key);
   });
 })();
-``
+
+  
+// ===== Service Tabs (single-page) =====
+(function initServiceTabs(){
+  const tabs = document.querySelectorAll('.service-tabs .tab');
+  const panels = document.querySelectorAll('.tab-panel');
+  if (!tabs.length || !panels.length) return;
+
+  const getKey = (btn) => btn?.dataset?.tab || '';
+  const setActive = (key) => {
+    // toggle tombol
+    tabs.forEach(t => {
+      const active = getKey(t) === key;
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    // toggle panel
+    panels.forEach(p => {
+      const active = p.id === `panel-${key}`;
+      if (active){ p.classList.add('is-active'); p.removeAttribute('hidden'); }
+      else { p.classList.remove('is-active'); p.setAttribute('hidden',''); }
+    });
+    // update hash (deep-link)
+    if (key) history.replaceState(null,'', `#${key}`);
+  };
+
+  // inisialisasi dari hash (services.html#everyday)
+  const initial = (location.hash || '').replace('#','');
+  const defaultKey = getKey(tabs[0]);
+  const startKey = ['party','toyou','everyday','wedding'].includes(initial) ? initial : defaultKey;
+  setActive(startKey);
+
+  // handler klik + keyboard
+  tabs.forEach(btn => {
+    btn.addEventListener('click', (e) => { e.preventDefault(); setActive(getKey(btn)); });
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(getKey(btn)); }
+    });
+  });
+
+  // back/forward hash
+  window.addEventListener('hashchange', () => {
+    const key = (location.hash || '').replace('#','');
+    if (key) setActive(key);
+  });
+})();
+
 
