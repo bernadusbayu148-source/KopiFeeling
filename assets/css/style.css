@@ -198,38 +198,3 @@ input, textarea{
   width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:10px; font:inherit;
 }
 
-/* ===== Dropdown visibility & layering (patch) ===== */
-.site-header{ position: sticky; top: 0; z-index: 1000; }
-.nav-container{ overflow: visible; }  /* cegah dropdown terpotong */
-
-.nav-item.dropdown{ position: relative; }
-.dropdown-toggle{ background: none; border: none; cursor: pointer; }
-
-.dropdown-menu{
-  position: absolute; top: 100%; left: 0;
-  min-width: 220px; padding: 8px;
-  background: #fff; border: 1px solid var(--border);
-  border-radius: 10px; box-shadow: var(--shadow);
-  display: none; z-index: 2000;  /* di atas header */
-}
-.dropdown-link{
-  display: block; padding: 10px 12px; border-radius: 8px; color: #333; text-decoration: none; font-weight: 600;
-}
-.dropdown-link:hover{ background: var(--bg-soft); color: var(--brand-red); }
-
-.nav-item.dropdown.open > .dropdown-menu{ display: block; }
-
-/* Mobile: dropdown mengikuti flow, bukan absolute */
-@media (max-width: 992px){
-  .nav{
-    display: none; position: fixed; inset: 64px 0 auto 0; background: #fff;
-    border-top: 1px solid var(--border); z-index: 1500;
-  }
-  .nav.open{ display: block; }
-  .nav-list{ flex-direction: column; align-items: flex-start; padding: 12px; }
-
-  .nav-item.dropdown .dropdown-menu{
-    position: static; display: none; border: none; box-shadow: none; padding: 0;
-  }
-  .nav-item.dropdown.open .dropdown-menu{ display: block; }
-}
