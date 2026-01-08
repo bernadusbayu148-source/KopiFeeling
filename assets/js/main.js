@@ -267,3 +267,63 @@ if (slider){
 })();
 
 
+// ===== Service Tabs (single-page) =====
+(function initServiceTabs(){
+  // Ambil semua tombol tab & panel
+  const tabs   = document.querySelectorAll('.service-tabs .tab');
+  const panels = document.querySelectorAll('.tab-panel');
+  if (!tabs.length || !panels.length) return;
+
+  // Ambil key dari tombol: "party", "toyou", "everyday", "wedding"
+  const getKey = (btn) => btn?.dataset?.tab || '';
+
+  // Fungsi untuk mengaktifkan tab + panel sesuai key
+  const setActive = (key) => {
+    // 1) Toggle state tombol (pill merah aktif)
+    tabs.forEach(t => {
+      const active = getKey(t) === key;
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    // 2) Tampilkan panel yang cocok, sembunyikan lainnya
+    panels.forEach(p => {
+      const active = p.id === `panel-${key}`;
+      if (active) { p.classList.add('is-active'); p.removeAttribute('hidden'); }
+      else        { p.classList.remove('is-active'); p.setAttribute('hidden', ''); }
+    });
+
+    // 3) Update hash agar bisa deep-link (services.html#everyday)
+    if (key) history.replaceState(null, '', `#${key}`);
+  };
+
+  // Inisialisasi state awal dari hash (jika ada), atau dari tab pertama
+  const allowed  = ['party','toyou','everyday','wedding'];
+  const initial  = (location.hash || '').replace('#', '');
+  const startKey = allowed.includes(initial) ? initial : getKey(tabs[0]);
+
+  setActive(startKey);
+
+  // Handler klik pada tombol tab
+  tabs.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      setActive(getKey(btn));
+    });
+
+    // Aksesibilitas: Enter/Space juga memilih tab
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setActive(getKey(btn));
+      }
+    });
+  });
+
+  // Jika user menekan Back/Forward (hash berubah), sinkronkan panel
+  window.addEventListener('hashchange', () => {
+    const key = (location.hash || '').replace('#', '');
+    if (allowed.includes(key)) setActive(key);
+  });
+})();
+
