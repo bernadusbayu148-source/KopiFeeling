@@ -107,3 +107,62 @@ if (slider){
     nav.classList.toggle('open');
   });
 })();
+
+
+// ===== Dropdown: open/close, click-outside, Escape (patch) =====
+(function initDropdowns(){
+  const dropdowns = document.querySelectorAll('.nav-item.dropdown');
+  if (!dropdowns.length) return;
+
+  const closeAll = () => {
+    dropdowns.forEach(dd => {
+      dd.classList.remove('open');
+      const btn = dd.querySelector('.dropdown-toggle');
+      btn?.setAttribute('aria-expanded','false');
+    });
+  };
+
+  dropdowns.forEach(dd => {
+    const btn = dd.querySelector('.dropdown-toggle');
+    const menu = dd.querySelector('.dropdown-menu');
+    if (!btn || !menu) return;
+
+    // Klik toggle -> buka/tutup
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const isOpen = dd.classList.contains('open');
+      closeAll(); // tutup dropdown lain
+      if (!isOpen){
+        dd.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+      } else {
+        dd.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+    });
+
+    // Klik di luar -> tutup
+    document.addEventListener('click', (e) => {
+      if (!dd.contains(e.target)) {
+        dd.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+    });
+
+    // Keyboard Escape -> tutup
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape'){
+        dd.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+        btn.blur();
+      }
+    });
+  });
+
+  // Jangan auto-open di halaman Station
+  if ((location.pathname || '').toLowerCase().includes('stations')) {
+    closeAll();
+  }
+})();
+
